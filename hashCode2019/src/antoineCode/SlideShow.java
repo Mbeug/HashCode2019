@@ -24,10 +24,10 @@ public class SlideShow {
 
     @Override
     public String toString() {
-        String result = nb_slide + "\n";
+        String result = Integer.toString(nb_slide);
         for (Object photo : photos) {
             Photo temp = (Photo) photo;
-            result = result.concat(Integer.toString(temp.getId())) + "\n";
+            result = result.concat("\n" + temp.getId());
         }
         return result;
     }

@@ -23,7 +23,7 @@ public class AntoineTests {
 
         System.out.println(slideShow.toString());
 
-        assertEquals("1\n0\n", slideShow.toString());
+        assertEquals("1\n0", slideShow.toString());
 
     }
 }
