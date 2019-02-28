@@ -1,37 +1,47 @@
 package maxCode;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
 public class Max {
 
-    public void read(String filename){
-        Scanner lecteur ;
+    public Photo[] read(String filename){
+        Scanner scan= null;
+        Photo tab_photo []=null;
         try {
-            File fichier = new File(filename);
-            lecteur = new Scanner(fichier);
+            scan = new Scanner(new File(filename));
 
-            int nbr_photo = lecteur.nextInt(); //nombre de photo dans le fichier
 
-            int id_photo = lecteur.nextInt();
-            int nbr_tags = lecteur.nextInt();
+            int id_photo = 0;
 
-            for (int a = 0; a < nbr_photo; a++) {
-                String or = lecteur.next();
-                Photo n = new Photo(id_photo,or , nbr_tags, null);
+            int nbr_photo = scan.nextInt();
 
-                for (int i = 0; i < nbr_tags; i++) {
-                    String s;
-                    s = lecteur.next();
-                    n.getTags()[i] = s;
-                }
+           tab_photo = new Photo[nbr_photo];
 
-                id_photo++;
-                nbr_tags = 0;
+            while (scan.hasNextLine() && id_photo < nbr_photo) {
+                String line = scan.nextLine();
+                if (line.length()>0){
+                    String [] tab = line.split(" ");
+                    Photo p = new Photo(id_photo, tab[0], Integer.parseInt(tab[1]),null );
+
+                    String[] tags= new String[p.getNbrTags()];
+
+                    int idx = 0;
+                    for(int i = 2; i <tab.length; i++){
+                        tags[idx] = tab[i];
+                        idx++;
+                    }
+                    p.setTags(tags);
+                    tab_photo[id_photo] = p;
+
+                    id_photo++;}
+
             }
-        }catch(IOException e){
-            System.out.println("[ERROR]:"+e.getMessage());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
+        return tab_photo;
     }
 }
