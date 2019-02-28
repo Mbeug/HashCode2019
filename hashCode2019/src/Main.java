@@ -1,26 +1,43 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import damsCode.Dams;
+
+import java.io.*;
+import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static class Photo{
+        public String [] tags;
+        public String orientation;
+        public int id;
+    }
 
-        String filename = args[0];
+    public static void main(String[] args) throws FileNotFoundException {
+        java.util.Scanner lecteur ;
 
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(filename));
+        java.io.File fichier = new java.io.File(args[0]);
+        lecteur = new java.util.Scanner(fichier);
 
-            StringBuilder sb = new StringBuilder();
-            String line = br.readLine();
-            while (line != null) {
-                sb.append(line);
+        int nbr_photo = lecteur.nextInt(); //nombre de photo dans le fichier
 
-                line = br.readLine();
+        int id_photo = 0;
+        int nbr_tags = 0;
+
+        for (int a = 0; a <= nbr_photo; a++) {
+            Photo n = new Photo();
+            n.id = id_photo;
+            n.orientation = lecteur.next();
+
+            //création tableau pour les tags
+            n.tags = new String[nbr_tags];
+
+            for (int i = 0; i < nbr_tags; i++) {
+                String s = new String();
+                s = lecteur.next();
+                n.tags[i] = s;
             }
-            String everything = sb.toString();
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
+
+            id_photo++;
+            nbr_tags = 0;
         }
     }
 }
