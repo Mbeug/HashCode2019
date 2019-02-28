@@ -33,4 +33,15 @@ public class Photo {
     public void setTags(String[] tags) {
         this.tags = tags;
     }
+
+    @Override
+    public String toString() {
+        String res = "[id:"+id+" orientation:"+or+" nombre tags:"+nbrTags+" tags:";
+        for (String s :
+                tags) {
+            res = res.concat(s+",");
+        }
+        res += "]";
+        return res;
+    }
 }
