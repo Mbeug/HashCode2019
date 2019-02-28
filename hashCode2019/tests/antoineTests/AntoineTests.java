@@ -24,6 +24,22 @@ public class AntoineTests {
         System.out.println(slideShow.toString());
 
         assertEquals("1\n0", slideShow.toString());
+    }
 
+    @Test
+    public void testToStringHashCode(){
+        ArrayList<Photo> array = new ArrayList<>();
+        String[] tags0 = {"cat", "garden"};
+        String[] tags1 = new String[2];
+        String[] tags2 = new String[2];
+        tags0[0] = "cat";
+        tags1[1] = "garden";
+        Photo photo = new Photo(0, "v", 2, tags0);
+        array.add(photo);
+        SlideShow slideShow = new SlideShow(1, array);
+
+        System.out.println(slideShow.toString());
+
+        assertEquals("1\n0", slideShow.toString());
     }
 }
